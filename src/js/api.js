@@ -6,19 +6,13 @@ export async function fetchImages(query, page = 1, perPage = 40) {
     query
   )}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(
-        `Sorry, there are no images matching your search query. Plea ${response.status}`
-      );
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(
-      'Sorry, there are no images matching your search query. Plea',
-      error
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(
+      `Sorry, there are no images matching your search query. Please try again.`
     );
-    throw error;
   }
+
+  return await response.json();
 }
